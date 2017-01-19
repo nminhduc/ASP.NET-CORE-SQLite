@@ -1,0 +1,14 @@
+@model MyFirstApp.Models.Book
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<form asp-action="Create">
+  <input asp-for="Title"/><br>
+  <input asp-for="Author"/>
+  <input asp-for="metaData"/>
+  <input type="submit" value="Create"/>
+</form>
