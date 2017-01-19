@@ -1,5 +1,8 @@
 @model IEnumerable<MyFirstApp.Models.Book>
 <div>
+  <form asp-controller="Book" asp-action="Index" method="GET">
+    <input type="text" name="Title"/> 
+  </form>
   @foreach (var item in Model) {
     <tr>
       <td>

@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MyFirstApp.Models;
 using Microsoft.EntityFrameworkCore;
+using MyFirstApp.ViewModels;
+using MyFirstApp.Business;
 
 namespace MyFirstApp.Controllers
 {
@@ -30,9 +32,21 @@ namespace MyFirstApp.Controllers
             }
             return View(book);
         }
-        public async Task<IActionResult> Index()
+      //   public async Task<IActionResult> Index(ProductSearchModel producSearch)
+        public async Task<IActionResult> Index(ProductSearchModel producSearch)
+        
         {
-            return View(await _context.Book.ToListAsync());
-        }
+            var business = new BookBusinessLogic();
+            var model = business.SearchBook(producSearch);
+            return View(await model.ToListAsync());
+
+        //     var books = from m in _context.Book
+        //                 select m;
+        //     if (!String.IsNullOrEmpty(producSearch.Title))
+        //     {
+        //         books = books.Where(s => s.Title.Contains(producSearch.Title));
+        //     }
+        //     return View(await books.ToListAsync());
+         }
     }
 }
