@@ -1,7 +1,12 @@
+@{
+  Layout = "~/Views/Shared/_Layout.cshtml";
+}
 @model IEnumerable<MyFirstApp.Models.Book>
 <div>
   <form asp-controller="Book" asp-action="Index" method="GET">
     <input type="text" name="Title"/> 
+    <input type="text" name="Author"/> 
+    <input type="submit" value="Search" />
   </form>
   @foreach (var item in Model) {
     <tr>

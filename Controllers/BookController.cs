@@ -32,7 +32,6 @@ namespace MyFirstApp.Controllers
             }
             return View(book);
         }
-      //   public async Task<IActionResult> Index(ProductSearchModel producSearch)
         public async Task<IActionResult> Index(ProductSearchModel producSearch)
         
         {
@@ -40,13 +39,20 @@ namespace MyFirstApp.Controllers
             var model = business.SearchBook(producSearch);
             return View(await model.ToListAsync());
 
-        //     var books = from m in _context.Book
-        //                 select m;
-        //     if (!String.IsNullOrEmpty(producSearch.Title))
-        //     {
-        //         books = books.Where(s => s.Title.Contains(producSearch.Title));
-        //     }
-        //     return View(await books.ToListAsync());
+         }
+         public ActionResult Edit(int? id)
+         {
+             var business = new BookBusinessLogic();
+             if (id == null)
+             {
+                 return NotFound();
+             }
+             else
+             {
+                var book = business.GetBookByID(id);
+                return View(book);
+             }
          }
     }
+    
 }

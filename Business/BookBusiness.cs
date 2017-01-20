@@ -19,8 +19,7 @@ namespace MyFirstApp.Business
       }
       public IQueryable<Book> SearchBook(ProductSearchModel productSearch)
       {
-        var book = from m in _context.Book
-                    select m;
+        var book = _context.Book.AsQueryable();
         if (productSearch != null)
         {
           if (!string.IsNullOrEmpty(productSearch.Title))
@@ -33,6 +32,12 @@ namespace MyFirstApp.Business
             book = book.Where(x => x.Title.Contains(productSearch.Author));
           }
         }
+        return book;
+      }
+
+      public Book GetBookByID(int? id)
+      {
+        var book = _context.Book.SingleOrDefault(x => x.Id == id);
         return book;
       }
   }
